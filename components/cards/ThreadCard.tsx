@@ -20,6 +20,7 @@ interface Props {
     image: string;
   } | null;
   createdAt: string;
+  image: string;
   comments: {
     author: {
       image: string;
@@ -34,6 +35,7 @@ function ThreadCard({
   parentId,
   content,
   author,
+  image,
   community,
   createdAt,
   comments,
@@ -41,35 +43,44 @@ function ThreadCard({
 }: Props) {
   return (
     <article
-      className={`flex w-full flex-col rounded-xl ${
+      className={`flex max-w-screen flex-col rounded-xl h-auto ${
         isComment
           ? "px-0 xs:px-7"
-          : "bg-black border-white border box-shadow p-7"
+          : "bg-black border-dark-4 border box-shadow p-7"
       }`}
     >
       <div className="flex items-start justify-between">
         <div className="flex w-full flex-1 flex-row gap-4">
           <div className="flex flex-col items-center">
             <Link href={`/profile/${author.id}`} className="relative h-11 w-11">
-            <Image
-    src={author.image}
-    alt="user_community_image"
-    layout="fill" objectFit="cover"
-    className="cursor-pointer rounded-full bg-cover"
-/>
+              <Image
+                src={author.image}
+                alt="user_community_image"
+                layout="fill"
+                objectFit="cover"
+                className="cursor-pointer rounded-full bg-cover"
+              />
             </Link>
 
             <div className="thread-card_bar" />
           </div>
 
-          <div className="flex w-full flex-col">
+          <div className="flex max-w-[80%] flex-col">
             <Link href={`/profile/${author.id}`} className="w-fit">
               <h4 className="cursor-pointer text-base-semibold text-light-1">
                 {author.name}
               </h4>
             </Link>
 
-            <p className="mt-2 text-small-regular text-light-2">{content}</p>
+            <p className="mt-2 text-small-regular  whitespace-wrap word-break-all break-words text-light-2">
+              {content}
+            </p>
+            <Image
+              src={image}              alt="user_community_image"
+              layout="fill"
+              objectFit="cover"
+              className=" object-contain max-h-10 max-w-10 top-[20px] "
+            />
 
             <div className={`${isComment && "mb-10"} mt-5 flex flex-col gap-3`}>
               <div className="flex gap-3.5">

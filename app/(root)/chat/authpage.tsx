@@ -1,50 +1,45 @@
-import axios from "axios"; import { useState } from "react";
-import { redirect } from "next/navigation";
+// "use server"
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { currentUser } from "@clerk/nextjs";
-import { fetchUser } from "@/lib/actions/user.actions";
 
-// async function getInUserInfo() {
-//   const user = await currentUser();
-//   if (!user) return null;
-
-//   const userInfo = await fetchUser(user.id);
-//   if (!userInfo?.onboarded) redirect("/onboarding");
-
-//   const userData = {
-//     secret: userInfo?._id,
-//     username: userInfo ? userInfo?.username : user.username,
-//   };
-//   return userData;
-// }
 const AuthPage = (props: any) => {
   const [username, setUsername] = useState<string>("");
   const [secret, setSecret] = useState<string>("");
-  const onLogin = (e:any) => {
+
+  const onLogin = (e: any) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/login", { username, secret })
-      .then((r) => props.onAuth({ ...r.data, secret })) // NOTE: over-ride secret
-      // .catch((e) => console.log(JSON.stringify(e.response.data)));
+      .get("https://api.chatengine.io/users/me/", {
+        headers: {
+          "Project-ID": "8e31bff0-d614-490e-a48a-7c649755ff83",
+          "User-Name": username,
+          "User-Secret": secret,
+        },
+      })
+      .then((r) => props.onAuth({ ...r.data, secret }));
   };
 
-  const onSignup = (e:any) => {
+  const onSignup = (e: any) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/signupChat", {
-        username,
-        secret,
-      })
-      .then((r) => props.onAuth({ ...r.data, secret })) // NOTE: over-ride secret
-      // .catch((e) => console.log(JSON.stringify(e.response.data)));
+      .post(
+        "https://api.chatengine.io/users/",
+        { username, secret },
+        { headers: { "Private-Key": "655b2459-6f5c-4a0f-894a-91c7c093444c" } }
+      )
+      .then((r) => props.onAuth({ ...r.data, secret }));
+    setUsername("");
   };
 
   return (
-    <div className="login-page bg-black min-h-screen max-w-4xl mx-auto flex items-center justify-center">
-      <div className="card grid grid-cols-2 gap-10">
-        Login Form
-        <div className="grid w-full sm:w-auto">
-          {" "}
-          <form onSubmit={onLogin} className="">
+    <div className="login-page bg-black w-[50%] max-h-screen max-w-screen mx-auto p-4 sm:p-0">
+      <div className="card mx-auto max-w-screen-sm  space-y-[20px] ">
+        <div>
+          <form
+            onSubmit={onLogin}
+            className="mx-auto p-auto flex-row  h-[300px]"
+          >
             <div className="title">Login</div>
             <input
               type="text"
@@ -62,14 +57,13 @@ const AuthPage = (props: any) => {
             />
             <button
               type="submit"
-              className="text-black bg-white w-full rounded-10px px-3 py-2"
+              className="text-white bg-black box-shadow border-[2px]  w-[100px] font-bold rounded-[20px] px-3 py-2"
             >
               LOG IN
             </button>
           </form>
         </div>
-        <div className="grid w-full sm:w-auto">
-          {" "}
+        <div>
           <form onSubmit={onSignup}>
             <div className="title">or Sign Up</div>
             <input
@@ -78,6 +72,7 @@ const AuthPage = (props: any) => {
               placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
               className="chat_style"
+              value={username}
             />
             <input
               type="password"
@@ -86,10 +81,9 @@ const AuthPage = (props: any) => {
               onChange={(e) => setSecret(e.target.value)}
               className="chat_style"
             />
-
             <button
               type="submit"
-              className="text-black bg-white w-full rounded-10px px-3 py-2"
+              className="text-black bg-white w-[100px] font-bold rounded-[20px] px-3 py-2"
             >
               SIGN UP
             </button>

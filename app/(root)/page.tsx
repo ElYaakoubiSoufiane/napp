@@ -27,7 +27,7 @@ async function Home({
     <div className="">
       <h1 className="head-text text-left">Home</h1>
 
-      <section className="mt-9 flex flex-col gap-10">
+      <section className="mt-9 flex flex-col gap-10 scroll-p-11 h-auto">
         {result.posts.length === 0 ? (
           <p className="no-result">No threads found</p>
         ) : (
@@ -42,8 +42,7 @@ async function Home({
                 author={post.author}
                 community={post.community}
                 createdAt={post.createdAt}
-                comments={post.children}
-              />
+                comments={post.children} image={post.image}              />
             ))}
           </>
         )}

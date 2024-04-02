@@ -21,7 +21,8 @@ async function page({ params }: { params: { id: string } }) {
   const thread = await fetchThreadById(params.id);
 
   return (
-    <section className='relative'>
+    <section className='relative '>
+    
       <div>
         <ThreadCard
           id={thread._id}

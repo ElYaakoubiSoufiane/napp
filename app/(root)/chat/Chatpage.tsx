@@ -13,7 +13,7 @@ const ChatsPage = (props: any) => {
   return (
     <div
       style={{ height: "500px", width: "700px" }}
-      className="rounded-[20px] bg-black border-white border"
+      className="rounded-[20px] bg-white border-white border"
     >
       <MultiChatSocket {...chatProps} />
       <MultiChatWindow {...chatProps} />
