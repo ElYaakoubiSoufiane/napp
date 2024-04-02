@@ -1,0 +1,94 @@
+   <motion.div
+      variants={item}
+      initial={"hidden"}
+      whileInView={"visible"}
+      viewport={{ once: false, amount: 0.5 }}
+      transition={{ staggerChildren: 0.5 }}
+      className="w-full py-[80px]  bg-white element-center "
+    >
+      <div className="   h-[350px] element-shadow rounded-[10px]  sm:h-[400px] w-[90%] md:w-[90%]  lg:w-[60%]  flex ">
+        <div className="flex-1 rounded-tl-[10px] rounded-bl-[10px] flex text-center flex-col items-center justify-center bg-black  ">
+          <h1 className="text-[white] text-center mx-[5px] font-bold text-[17px] md:text-[40px] self-center mb-[70px] md:mb-[100px]">
+            Welcome Back
+          </h1>
+          <Link to="/login">
+            <button
+              type="button"
+              className="[outline:none] text-[16px]  text-white bg-transparent  border-[1.4px] font-bold md:text-[20px]  w-[90px] md:w-[180px] font-[bold] text-sm cursor-pointer px-0 py-2 element-center h-[36px] md:h-[45px] rounded-[15px] border-white"
+            >
+              Log In
+            </button>
+          </Link>
+        </div>
+        <div className="flex-[2] flex flex-col items-center justify-center bg-[white] rounded-tr-[10px] rounded-br-[10px]">
+          <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+            <h1 className="text-[17px] sm:text-[20px]  font-bold  md:text-[40px] mt-0">
+              Create Account
+            </h1>
+
+         
+
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={(e) => {setEmail(e.target.value);
+              setShowError(false)
+              }}
+              value={email}
+              required
+              className="[outline:none] text-center border mb-2.5 p-2 rounded-[5px] border-solid   w-[200px] md:w-[330px] bg-[#eee] text-sm mx-0 my-[5px] border-[none] focus:border-black focus:border-[2px]"
+            />
+
+            <select
+              id="level"
+              name="level"
+              required
+              className="[outline:none] text-center border mb-2.5 p-2 rounded-[5px] border-solid   w-[200px] md:w-[330px] bg-[#eee] text-sm mx-0 my-[5px] border-[none] focus:border-black focus:border-[2px]"
+              placeholder="CP / CI"
+              value={level}
+              onChange={(e) => {setLevel(e.target.value);
+                setShowError(false)
+              }}
+            >
+              <option value="CP-1">CP-1</option>
+              <option value="CP-2">CP-2</option>
+              <option value="CI-1">CI-1</option>
+              <option value="CI-2">CI-2</option>
+              <option value="CI-3">CI-3</option>
+            </select>
+
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={(e) => {setPassword(e.target.value);
+              
+                setShowError(false)
+
+              }}
+              value={password}
+              required
+              className="[outline:none] text-center border mb-2.5 p-2 rounded-[5px] border-solid   w-[200px] md:w-[330px] bg-[#eee] text-sm mx-0 my-[5px] border-[none] focus:border-black focus:border-[2px]"
+            />
+
+            {error && showError &&(
+              <div className=" element-center w-[150px] md:w-[370px] text-[10px] md:text-sm bg-[#ff5a5a] text-[white] text-center mx-0 my-[5px] md:p-[15px] rounded-[5px]">
+                {error}
+              </div>
+            )}
+            <button
+              type="submit"
+              onClick={()=>{
+                setShowError(true);
+
+              
+              }}
+              className="[outline:none]  text-[16px] font-bold md:text-[20px]  text-white bg-[black]   w-[100px] md:w-[180px] font-[bold] text-sm cursor-pointer px-0 py-2 element-center  md:h-[45px] rounded-[15px] "
+            >
+              Sing Up
+            </button>
+          </form>
+        </div>
+      </div>
+    </motion.div>

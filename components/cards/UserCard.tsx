@@ -37,7 +37,7 @@ function UserCard({ id, name, username, imgUrl, personType }: Props) {
       </div>
 
       <Button
-        className="user-card_btn  max-w-[40px]"
+        className="user-card_btn right-0  max-w-auto"
         onClick={() => {
           if (isCommunity) {
             router.push(`/communities/${id}`);

@@ -28,14 +28,16 @@ export default function RootLayout({
         baseTheme: dark,
       }}
     >
-      <html lang='en'>
+      <html lang="en">
         <body className={inter.className}>
           <Topbar />
 
-          <main className='flex flex-row'>
+          <main className="flex flex-row">
             <LeftSidebar />
-            <section className='main-container overflow-y-auto h-screen '>
-              <div className='w-full max-w-4xl'>{children}</div>
+            <section className="main-container overflow-y-auto h-screen ">
+              <div className="max-w-screen lg:w-[700px] max-w-5xl">
+                {children}
+              </div>
             </section>
             {/* @ts-ignore */}
             <RightSidebar />
