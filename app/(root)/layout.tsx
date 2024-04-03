@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "S-FIXED",
-  description: "A Next.js 13 Meta S-FIXED application",
+  description: "Generated With love by Elyaakoubi Soufiane",
 };
 
 export default function RootLayout({
